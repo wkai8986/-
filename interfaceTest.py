@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QApplication,QWidget,QMainWindow
 from db_tool import DB
 import db_tool
 
+db = None
+
 
 class Interface_Test(QMainWindow,Ui_Interface):
 
@@ -16,27 +18,32 @@ class Interface_Test(QMainWindow,Ui_Interface):
         self.btn_add.clicked.connect(self.add)
 
     def add(self):
-        self.db = DB(host='192.168.224.128', port=3306, db='interfaces', user='root', passwd='123456')
+ #       self.db = DB(host='192.168.224.128', port=3306, db='interfaces', user='root', passwd='123456')
         i_name = self.le_interName.text()
         i_addr = self.le_addr.text()
         if ("" != i_name and "" != i_addr):
-            self.db.insert(i_name, i_addr)
+            db.insert(i_name, i_addr)
             self.le_interName.setText("")
             self.le_addr.setText("")
-        self.db.close()
+ #       self.db.close()
     
+ #   def queryAll(self):
+        
 
 
 if __name__ == '__main__':
     
     #pyqt5程序需要该对象，sys.argv为命令行参数，保证可以启动
     app = QApplication(sys.argv)
+    #连接数据库
+    db = DB(host='192.168.224.128', port=3306, db='interfaces', user='root', passwd='123456')
     #初始化界面
     it = Interface_Test()
     #显示窗口
     it.show()
     #程序退出
     sys.exit(app.exec_())
+    db.close()
 '''
     w = QWidget()
     w.setWindowTitle("test")
