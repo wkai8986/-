@@ -26,7 +26,11 @@ class DB():
         sql = "INSERT INTO `ixp_interfaces` (`i_name`, `i_addr`) VALUES ('" + i_name + "','" + i_addr + "')"
         self.cur.execute(sql)
         self.conn.commit()
-  
+
+    def query(self):
+        sql = "SELECT * FROM `ixp_interfaces`"
+        self.cur.execute(sql)
+        return self.cur.fetchall()
     def close(self):
         # 提交数据库并执行        
         self.conn.commit()

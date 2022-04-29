@@ -53,6 +53,7 @@ class Ui_Interface(object):
         self.retranslateUi(Interface)
         QtCore.QMetaObject.connectSlotsByName(Interface)
 
+
     def retranslateUi(self, Interface):
         _translate = QtCore.QCoreApplication.translate
         Interface.setWindowTitle(_translate("Interface", "MainWindow"))
