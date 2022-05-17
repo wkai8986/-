@@ -3,7 +3,7 @@ import pymysql
 
 
 class DB():
-    def __init__(self, host='192.168.224.128', port=3306, db='interfaces', user='root', passwd='123456', charset='utf8'):
+    def __init__(self, host='192.168.224.130', port=3306, db='interfaces', user='root', passwd='123456', charset='utf8'):
         # 建立连接 
         self.conn = pymysql.connect(host=host, port=port, db=db, user=user, passwd=passwd, charset=charset)
         # 创建游标，操作设置为字典类型        

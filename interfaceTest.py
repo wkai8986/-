@@ -1,15 +1,15 @@
 import sys
 
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from interface import Ui_Interface
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QHeaderView
+from interface import Ui_TabWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QHeaderView, QTabWidget
 from db_tool import DB
 import db_tool
 
 # 数据库连接
 db = None
 
-class InterfaceTest(QMainWindow, Ui_Interface):
+class InterfaceTest(QTabWidget, Ui_TabWidget):
     def __init__(self,parent=None):
         super(InterfaceTest, self).__init__(parent)
         self.setupUi(self)
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     #pyqt5程序需要该对象，sys.argv为命令行参数，保证可以启动
     app = QApplication(sys.argv)
     #连接数据库
-    db = DB(host='192.168.224.128', port=3306, db='interfaces', user='root', passwd='123456')
+    db = DB(host='192.168.224.130', port=3306, db='interfaces', user='root', passwd='123456')
     #初始化界面
     it = InterfaceTest()
     #显示窗口
