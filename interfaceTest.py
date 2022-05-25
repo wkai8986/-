@@ -14,25 +14,25 @@ class InterfaceTest(QTabWidget, Ui_TabWidget):
         super(InterfaceTest, self).__init__(parent)
         self.setupUi(self)
         #绑定事件
-        self.btn_add.clicked.connect(self.add)
-        self.btn_search.clicked.connect(self.query_all)
+        self.btn_add.clicked.connect(self.add_interface)
+        self.btn_search.clicked.connect(self.query_all_interfaces)
 
-    def add(self):
+    def add_interface(self):
  #       self.db = DB(host='192.168.224.128', port=3306, db='interfaces', user='root', passwd='123456')
         i_name = self.le_interName.text()
         i_addr = self.le_addr.text()
         if ("" != i_name and "" != i_addr):
-            db.insert(i_name, i_addr)
+            db.addInterface(i_name, i_addr)
             self.le_interName.setText("")
             self.le_addr.setText("")
-        self.query_all()
+        self.query_all_interfaces()
  #       self.db.close()
     
-    def query_all(self):
+    def query_all_interfaces(self):
         # 建立模型，加载数据
         model = QStandardItemModel()
         model.setHorizontalHeaderLabels(["编号","接口名称","接口地址","描述"])
-        datas = db.query()
+        datas = db.findAllInterfaces()
       #  print(datas)
         for i,line_data in enumerate(datas):
             for j,item_data in enumerate(line_data.values()):
@@ -43,12 +43,19 @@ class InterfaceTest(QTabWidget, Ui_TabWidget):
         self.tv_interfaces.verticalHeader().hide()
         # 水平均匀填充
         self.tv_interfaces.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+    # 查询功能
+    def query_functions(self):
+        pass
+
+
+
 if __name__ == '__main__':
     
     #pyqt5程序需要该对象，sys.argv为命令行参数，保证可以启动
     app = QApplication(sys.argv)
     #连接数据库
-    db = DB(host='192.168.224.130', port=3306, db='interfaces', user='root', passwd='123456')
+    db = DB()
     #初始化界面
     it = InterfaceTest()
     #显示窗口
